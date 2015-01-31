@@ -1,32 +1,41 @@
 (ns om-crud.util
-  (:require [datomic.api :as d]
-            [clojure.java.io :as io]
-            [clojure.edn :as edn])
-  (:import datomic.Util))
+  (:require [om-crud.rdf :as co])
+  (:import (com.hp.hpl.jena.tdb TDBFactory)
+           (com.hp.hpl.jena.query ReadWrite)))
 
-(def uri "datomic:free://localhost:4334/om_crud")
+(def directory "/home/markus/tdb")
+;; uri for some random resources
+(def uri "http://example.com/JohnSmith")
+(def uri2 "http://example.com/MarkusBa")
+(def uri3 "http://example.com/JohnDoe")
 
-(defn read-all [f]
-  (Util/readAll (io/reader f)))
-
-(defn transact-all [conn f]
-  (doseq [txd (read-all f)]
-    (d/transact conn txd))
-  :done)
-
-(defn create-db []
-  (d/create-database uri))
-
-(defn get-conn []
-  (d/connect uri))
-
-(defn load-schema []
-  (transact-all (get-conn) (io/resource "data/schema.edn")))
-
-(defn load-data []
-  (transact-all (get-conn) (io/resource "data/initial.edn")))
+;; the dataset we are operating on
+(def ds (TDBFactory/createDataset directory))
 
 (defn init-db []
-  (create-db)
-  (load-schema)
-  (load-data))
+  (do
+    ;; starts the transaction
+    (.begin ds (ReadWrite/WRITE))
+    ;; get the model to work with
+    (let [model (.getDefaultModel ds)
+          rs (co/create-resource model uri)
+          rs2 (co/create-resource model uri2)
+          rs3 (co/create-resource model uri3)
+          pro (co/create-property model "http://www.example.com" "fullname")]
+        ;; add the property to the resorce with some object
+        (co/add-object rs pro "John Smith")
+        (co/add-object rs2 pro "Markus Ba")
+        (co/add-object rs3 pro "John Doe")
+    (.commit ds)
+    (.end ds))))
+
+(comment
+  ;; quick test
+  (require '[om-crud.rdf :as co])
+  (import '[com.hp.hpl.jena.tdb TDBFactory])
+  (def directory "/home/markus/tdb")
+  (def qs "select ?s ?p ?o where { ?s ?p ?o }")
+  (def ds (TDBFactory/createDataset directory))
+  (def model (.getDefaultModel ds))
+  (co/select-query model qs)
+)
