@@ -42,7 +42,7 @@
   (generate-response (vec (map flatten-rdf-triple (persons-rdf)))))
 
 ;; for now empty
-(defn update-person [uri params]
+(defn update-person [params]
   (generate-response {:status :ok}))
 
 (comment
@@ -63,9 +63,9 @@
 (defroutes routes
   (GET "/" [] (index))
   (GET "/persons" [] (persons))
-  (PUT "/person/:uri/update"
+  (PUT "/person/update"
     {params :params edn-params :edn-params}
-    (update-person (:uri params) edn-params))
+    (update-person edn-params))
   (route/files "/" {:root "resources/public"}))
 
 (def app

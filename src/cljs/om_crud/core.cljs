@@ -64,12 +64,11 @@
                  :onClick #(om/set-state! owner :editing true)}
             "Edit"))))))
 
-;;TODO: http://www.example.com should not be part of the path
 (defn on-edit [uri fullname]
   (edn-xhr
     {:method :put
-     :url (str "person/" uri "/update")
-     :data {:fullname fullname}
+     :url (str "person/update")
+     :data {:uri uri :fullname fullname}
      :on-complete
      (fn [res]
        (println "server response:" res))}))
