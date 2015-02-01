@@ -38,7 +38,7 @@
 (defn persons []
   (generate-response (vec (map flatten-rdf-triple (persons-rdf)))))
 
-;; TODO: currently this is an insert although it looks like an update
+;; TODO: currently jena does not know that fullname is a one-to-one and not a one-to-many -> inserts
 ;; TODO: make general
 (defn update [{:keys [uri fullname] :as params}]
   (do
