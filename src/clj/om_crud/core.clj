@@ -35,9 +35,11 @@
   (let [uri (.getURI (:s triple))
         fullname (.getValue (:o triple))]
     {:uri uri, :fullname fullname}))
+    ; short test
+    ;{:uri (rand-int 1000), :fullname fullname}))
 
 (defn persons []
-  (generate-response (map flatten-rdf-triple (persons-rdf))))
+  (generate-response (vec (map flatten-rdf-triple (persons-rdf)))))
 
 ;; for now empty
 (defn update-person [uri params]

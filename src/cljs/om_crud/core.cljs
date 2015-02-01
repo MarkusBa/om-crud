@@ -1,4 +1,4 @@
-(ns om-crud.corecljs
+(ns om-crud.core
   (:require [cljs.reader :as reader]
             [goog.events :as events]
             [goog.dom :as gdom]
