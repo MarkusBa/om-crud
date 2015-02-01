@@ -29,6 +29,12 @@
   [model name-space local-name]
   (.getProperty model name-space local-name))
 
+;; getProperty is a misnomer, should be getStatement
+;; see http://www.cs.helsinki.fi/group/wwwmuseo/jena-doc/com/hp/hpl/mesa/rdf/jena/common/ResourceImpl.html
+(defn update-property
+  [resource property object]
+  (.changeObject (.getProperty resource property) object))
+
 (defn add-object
   [resource property object]
   (.addProperty resource property object))

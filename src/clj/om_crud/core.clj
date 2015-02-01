@@ -38,7 +38,6 @@
 (defn persons []
   (generate-response (vec (map flatten-rdf-triple (persons-rdf)))))
 
-;; TODO: currently jena does not know that fullname is a one-to-one and not a one-to-many -> inserts
 ;; TODO: make general
 (defn update [{:keys [uri fullname] :as params}]
   (do
@@ -46,7 +45,7 @@
     (let [model (.getDefaultModel ds)
           rs (co/get-resource model uri)
           pro (co/get-property model "http://www.example.com" "fullname")]
-        (co/add-object rs pro fullname)
+        (co/update-property rs pro fullname)
     (.commit ds)
     (.end ds))))
 
