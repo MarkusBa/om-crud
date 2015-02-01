@@ -64,7 +64,7 @@
                  :onClick #(om/set-state! owner :editing true)}
             "Edit"))))))
 
-;;TODO: different data
+;;TODO: http://www.example.com should not be part of the path
 (defn on-edit [uri fullname]
   (edn-xhr
     {:method :put
@@ -91,7 +91,7 @@
             (fn [person]
               (let [uri (:uri person)]
                 (om/build editable person
-                  {:opts {:edit-key :uri
+                  {:opts {:edit-key :fullname
                           :on-edit #(on-edit uri %)}})))
             (:persons app)))))))
 
