@@ -1,4 +1,4 @@
-(ns om-crud.core
+(ns om-crud.cljscriptcore
   (:require [cljs.reader :as reader]
             [goog.events :as events]
             [goog.dom :as gdom]
@@ -93,8 +93,8 @@
                 (om/build editable person
                   {:opts {:edit-key :uri
                           :on-edit #(on-edit uri %)}})))
-            (:classes app)))))))
+            (:persons app)))))))
 
-(om/root persons-view-view app-state
+(om/root persons-view app-state
   {:target (gdom/getElement "persons")})
 
