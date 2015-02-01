@@ -37,5 +37,7 @@
   (def qs "select ?s ?p ?o where { ?s ?p ?o }")
   (def ds (TDBFactory/createDataset directory))
   (def model (.getDefaultModel ds))
-  (co/select-query model qs)
+  (def result (co/select-query model qs))
+  (.getValue ob (:o (first result)))
+
 )

@@ -7,6 +7,10 @@
             [compojure.handler :as handler]
             [datomic.api :as d]))
 
+(def hithere "hi")
+
+(comment
+
 (def uri "datomic:free://localhost:4334/om_crud")
 (def conn (d/connect uri))
 
@@ -24,7 +28,7 @@
         eid   (ffirst
                 (d/q '[:find ?class
                        :in $ ?id
-                       :where 
+                       :where
                        [?class :class/id ?id]]
                   db id))]
     (d/transact conn [[:db/add eid :class/title title]])
@@ -54,3 +58,5 @@
 
 (defonce server
   (run-jetty #'app {:port 8080 :join? false}))
+
+)

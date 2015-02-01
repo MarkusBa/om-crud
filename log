@@ -1,0 +1,4 @@
+({:p #<ResourceImpl http://www.example.comfullname>, :s #<ResourceImpl http://example.com/JohnSmith>, :o #<LiteralImpl John Smith>} {:p #<ResourceImpl 
+http://www.example.comfullname>, :s #<ResourceImpl http://example.com/MarkusBa>, :o #<LiteralImpl Markus Ba>} {:p #<ResourceImpl http://www.example.comfullname>, :s 
+#<ResourceImpl http://example.com/JohnDoe>, :o #<LiteralImpl John Doe>})
+
