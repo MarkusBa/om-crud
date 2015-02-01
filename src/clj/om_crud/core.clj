@@ -5,14 +5,12 @@
             [compojure.core :refer [defroutes GET PUT]]
             [compojure.route :as route]
             [compojure.handler :as handler]
-            [datomic.api :as d]))
+            [om-crud.rdf :as co])
+  (:import (com.hp.hpl.jena.tdb TDBFactory)
+           (com.hp.hpl.jena.query ReadWrite)))
 
-(def hithere "hi")
+(def directory "/home/markus/tdb")
 
-(comment
-
-(def uri "datomic:free://localhost:4334/om_crud")
-(def conn (d/connect uri))
 
 (defn index []
   (file-response "public/html/index.html" {:root "resources"}))
@@ -22,7 +20,31 @@
    :headers {"Content-Type" "application/edn"}
    :body (pr-str data)})
 
-(defn update-class [id params]
+(defn persons-rdf []
+  (let [ds (TDBFactory/createDataset directory)
+        sth (.begin ds (ReadWrite/READ))
+        model (.getDefaultModel ds)
+        qs "select ?s ?p ?o where { ?s ?p ?o }"
+        persons (co/select-query model qs)]
+    (.commit ds)
+    (.end ds)
+    persons))
+
+;;{:p #<ResourceImpl http://www.example.comfullname>, :s #<ResourceImpl http://example.com/JohnSmith>, :o #<LiteralImpl John Smith>}
+(defn flatten-rdf-triple [triple]
+  (let [uri (.getURI (:s triple))
+        fullname (.getValue (:o triple))]
+    {:uri uri, :fullname fullname}))
+
+(defn persons []
+  (generate-response (map flatten-rdf-triple (persons-rdf))))
+
+;; for now empty
+(defn update-person [uri params]
+  (generate-response {:status :ok}))
+
+(comment
+(defn update-person [id params]
   (let [db    (d/db conn)
         title (:class/title params)
         eid   (ffirst
@@ -33,23 +55,15 @@
                   db id))]
     (d/transact conn [[:db/add eid :class/title title]])
     (generate-response {:status :ok})))
+)
 
-(defn classes []
-  (let [db (d/db conn)
-        classes
-        (vec (map #(d/touch (d/entity db (first %)))
-               (d/q '[:find ?class
-                      :where
-                      [?class :class/id]]
-                 db)))]
-    (generate-response classes)))
 
 (defroutes routes
   (GET "/" [] (index))
-  (GET "/classes" [] (classes))
-  (PUT "/class/:id/update"
+  (GET "/persons" [] (persons))
+  (PUT "/person/:uri/update"
     {params :params edn-params :edn-params}
-    (update-class (:id params) edn-params))
+    (update-person (:uri params) edn-params))
   (route/files "/" {:root "resources/public"}))
 
 (def app
@@ -59,4 +73,3 @@
 (defonce server
   (run-jetty #'app {:port 8080 :join? false}))
 
-)
