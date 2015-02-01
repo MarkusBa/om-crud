@@ -10,7 +10,7 @@
            (com.hp.hpl.jena.query ReadWrite)))
 
 (def directory "/home/markus/tdb")
-
+(def ds (TDBFactory/createDataset directory))
 
 (defn index []
   (file-response "public/html/index.html" {:root "resources"}))
@@ -21,8 +21,7 @@
    :body (pr-str data)})
 
 (defn persons-rdf []
-  (let [ds (TDBFactory/createDataset directory)
-        sth (.begin ds (ReadWrite/READ))
+  (let [sth (.begin ds (ReadWrite/READ))
         model (.getDefaultModel ds)
         qs "select ?s ?p ?o where { ?s ?p ?o }"
         persons (co/select-query model qs)]
@@ -35,30 +34,25 @@
   (let [uri (.getURI (:s triple))
         fullname (.getValue (:o triple))]
     {:uri uri, :fullname fullname}))
-    ; short test
-    ;{:uri (rand-int 1000), :fullname fullname}))
 
 (defn persons []
   (generate-response (vec (map flatten-rdf-triple (persons-rdf)))))
 
-;; for now empty
+;; TODO: currently this is an insert although it looks like an update
+;; TODO: make general
+(defn update [{:keys [uri fullname] :as params}]
+  (do
+    (.begin ds (ReadWrite/WRITE))
+    (let [model (.getDefaultModel ds)
+          rs (co/get-resource model uri)
+          pro (co/get-property model "http://www.example.com" "fullname")]
+        (co/add-object rs pro fullname)
+    (.commit ds)
+    (.end ds))))
+
 (defn update-person [params]
+  (update params)
   (generate-response {:status :ok}))
-
-(comment
-(defn update-person [id params]
-  (let [db    (d/db conn)
-        title (:class/title params)
-        eid   (ffirst
-                (d/q '[:find ?class
-                       :in $ ?id
-                       :where
-                       [?class :class/id ?id]]
-                  db id))]
-    (d/transact conn [[:db/add eid :class/title title]])
-    (generate-response {:status :ok})))
-)
-
 
 (defroutes routes
   (GET "/" [] (index))

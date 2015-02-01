@@ -25,6 +25,10 @@
   [model name-space local-name]
   (.createProperty model name-space local-name))
 
+(defn get-property
+  [model name-space local-name]
+  (.getProperty model name-space local-name))
+
 (defn add-object
   [resource property object]
   (.addProperty resource property object))
