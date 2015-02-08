@@ -15,7 +15,7 @@
 
 (defn init-db []
   (do
-    (log/error "something,something,dark side")
+    (log/info "importing data")
     ;; starts the transaction
     (.begin ds (ReadWrite/WRITE))
     ;; get the model to work with

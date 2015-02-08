@@ -14,6 +14,7 @@
                  [org.clojure/core.async "0.1.267.0-0d7780-alpha"]
                  [om "0.5.3"]
                  [compojure "1.1.6"]
+                 [ch.qos.logback/logback-classic "1.1.1"]
                  [fogus/ring-edn "0.2.0"]
                  [org.clojure/tools.logging "0.2.3"]
                  [com.datomic/datomic-free "0.9.4699"]]
