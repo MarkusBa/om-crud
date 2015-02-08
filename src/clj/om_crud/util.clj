@@ -31,6 +31,9 @@
     (.commit ds)
     (.end ds))))
 
+(defn test-logging[]
+  (log/error "test"))
+
 (comment
   ;; quick test
   (require '[om-crud.rdf :as co])
