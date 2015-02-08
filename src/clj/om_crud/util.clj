@@ -38,6 +38,9 @@
   (def ds (TDBFactory/createDataset directory))
   (def model (.getDefaultModel ds))
   (def result (co/select-query model qs))
-  (.getValue ob (:o (first result)))
+  (.getValue (:o (first result)))
+  (require '[om-crud.rdf :as rdf])
+  (def r (rdf/get-resource model "http://example.com/JohnDoe"))
+  (rdf/remove-resource model r)
 
 )

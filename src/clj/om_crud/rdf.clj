@@ -21,6 +21,11 @@
   [model uri]
   (.getResource model uri))
 
+(defn remove-resource
+  [model resource]
+  (.removeAll model resource nil nil)
+  (.removeAll model nil nil resource))
+
 (defn create-property
   [model name-space local-name]
   (.createProperty model name-space local-name))
