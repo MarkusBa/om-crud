@@ -1,4 +1,5 @@
 * DONE gitignore subfolders of out
-* research how general clojure keywords can be 
+* make logging work
+* research how general clojure keywords can be
 * make more general
 * add deletions

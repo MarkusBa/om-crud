@@ -11,10 +11,12 @@
                  [org.apache.jena/jena-core "2.12.1" :exclusions [[org.slf4j/slf4j-log4j12] [log4j/log4j]]]
                  [org.apache.jena/jena-tdb "1.1.1" :exclusions [[org.slf4j/slf4j-log4j12] [log4j/log4j]]]
                  [ring/ring "1.2.1"]
+                 [log4j/log4j "1.2.17"];;; should already be pulled in by datomic or sth. else
                  [org.clojure/core.async "0.1.267.0-0d7780-alpha"]
                  [om "0.5.3"]
                  [compojure "1.1.6"]
                  [fogus/ring-edn "0.2.0"]
+                 [org.clojure/tools.logging "0.2.3"]
                  [com.datomic/datomic-free "0.9.4699"]]
 
   :plugins [[lein-cljsbuild "1.0.2"]]

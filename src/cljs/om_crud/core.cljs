@@ -40,7 +40,16 @@
   (om/set-state! owner :editing false)
   (cb text))
 
-(defn editable [data owner {:keys [edit-key on-edit] :as opts}]
+(defn on-delete [uri]
+  (edn-xhr
+    {:method :delete
+     :url (str "person/delete")
+     :data {:uri uri}
+     :on-complete
+     (fn [res]
+       (println "server response:" res))}))
+
+(defn editable [data owner {:keys [edit-key uri on-edit] :as opts}]
   (reify
     om/IInitState
     (init-state [_]
@@ -62,7 +71,10 @@
           (dom/button
             #js {:style (display (not editing))
                  :onClick #(om/set-state! owner :editing true)}
-            "Edit"))))))
+            "Edit")
+          (dom/button
+            #js {:onClick #(on-delete uri)}
+            "X"))))))
 
 (defn on-edit [uri fullname]
   (edn-xhr
@@ -91,6 +103,7 @@
               (let [uri (:uri person)]
                 (om/build editable person
                   {:opts {:edit-key :fullname
+                          :uri uri
                           :on-edit #(on-edit uri %)}})))
             (:persons app)))))))
 

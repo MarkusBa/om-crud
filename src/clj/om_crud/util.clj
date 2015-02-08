@@ -1,5 +1,6 @@
 (ns om-crud.util
-  (:require [om-crud.rdf :as co])
+  (:require [om-crud.rdf :as co]
+            [clojure.tools.logging :as log])
   (:import (com.hp.hpl.jena.tdb TDBFactory)
            (com.hp.hpl.jena.query ReadWrite)))
 
@@ -14,6 +15,7 @@
 
 (defn init-db []
   (do
+    (log/error "something,something,dark side")
     ;; starts the transaction
     (.begin ds (ReadWrite/WRITE))
     ;; get the model to work with

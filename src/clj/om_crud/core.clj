@@ -2,9 +2,10 @@
   (:require [ring.util.response :refer [file-response]]
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.middleware.edn :refer [wrap-edn-params]]
-            [compojure.core :refer [defroutes GET PUT]]
+            [compojure.core :refer [defroutes GET PUT DELETE]]
             [compojure.route :as route]
             [compojure.handler :as handler]
+            [clojure.tools.logging :as log]
             [om-crud.rdf :as co])
   (:import (com.hp.hpl.jena.tdb TDBFactory)
            (com.hp.hpl.jena.query ReadWrite)))
@@ -53,12 +54,29 @@
   (update params)
   (generate-response {:status :ok}))
 
+;; TODO: make general
+(defn delete [{:keys [uri] :as params}]
+  (do
+    (.begin ds (ReadWrite/WRITE))
+    (let [model (.getDefaultModel ds)
+          rs (co/get-resource model uri)]
+        (co/remove-resource model rs)
+    (.commit ds)
+    (.end ds))))
+
+(defn delete-person [params]
+  (delete params)
+  (generate-response {:status :ok}))
+
 (defroutes routes
   (GET "/" [] (index))
   (GET "/persons" [] (persons))
   (PUT "/person/update"
     {params :params edn-params :edn-params}
     (update-person edn-params))
+  (DELETE "/person/delete"
+    {params :params edn-params :edn-params}
+    (delete-person edn-params))
   (route/files "/" {:root "resources/public"}))
 
 (def app
