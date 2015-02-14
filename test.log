@@ -5,3 +5,134 @@
 15569 [qtp2078307907-25] ERROR om-crud.core - key-value-pair: [:fullname "John Smithson"]
 3210 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
 3242 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3262 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3293 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3156 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3197 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3237 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3268 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+26577 [qtp223891296-24] WARN  o.e.j.server.AbstractHttpConnection - /entity/insert
+clojure.lang.ArityException: Wrong number of args (4) passed to: rdf$add-object
+	at clojure.lang.AFn.throwArity(AFn.java:437) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.AFn.invoke(AFn.java:51) ~[clojure-1.5.1.jar:na]
+	at om_crud.core$insert.invoke(core.clj:88) ~[na:na]
+	at om_crud.core$insert_entity.invoke(core.clj:93) ~[na:na]
+	at om_crud.core$fn__3851.invoke(core.clj:104) ~[na:na]
+	at compojure.core$make_route$fn__2074.invoke(core.clj:94) ~[na:na]
+	at compojure.core$if_route$fn__2058.invoke(core.clj:40) ~[na:na]
+	at compojure.core$if_method$fn__2051.invoke(core.clj:25) ~[na:na]
+	at compojure.core$routing$fn__2080.invoke(core.clj:107) ~[na:na]
+	at clojure.core$some.invoke(core.clj:2443) ~[clojure-1.5.1.jar:na]
+	at compojure.core$routing.doInvoke(core.clj:107) ~[na:na]
+	at clojure.lang.RestFn.applyTo(RestFn.java:139) ~[clojure-1.5.1.jar:na]
+	at clojure.core$apply.invoke(core.clj:619) ~[clojure-1.5.1.jar:na]
+	at compojure.core$routes$fn__2084.invoke(core.clj:112) ~[na:na]
+	at ring.middleware.edn$wrap_edn_params$fn__1698.invoke(edn.clj:34) ~[na:na]
+	at clojure.lang.Var.invoke(Var.java:415) ~[clojure-1.5.1.jar:na]
+	at ring.adapter.jetty$proxy_handler$fn__1637.invoke(jetty.clj:18) ~[na:na]
+	at ring.adapter.jetty.proxy$org.eclipse.jetty.server.handler.AbstractHandler$0.handle(Unknown Source) ~[na:na]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) ~[jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:363) ~[jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:483) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.content(AbstractHttpConnection.java:931) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.content(AbstractHttpConnection.java:992) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:856) [jetty-http-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:240) [jetty-http-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_71]
+3136 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3167 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+25284 [qtp1282445361-24] ERROR om-crud.core - {:s "", :p "", :o ""}
+3457 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3492 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+9745 [qtp727409827-19] WARN  o.e.j.server.AbstractHttpConnection - /entities
+java.lang.IllegalArgumentException: No matching field found: getValue for class com.hp.hpl.jena.rdf.model.impl.ResourceImpl
+	at clojure.lang.Reflector.getInstanceField(Reflector.java:271) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.Reflector.invokeNoArgInstanceMember(Reflector.java:300) ~[clojure-1.5.1.jar:na]
+	at om_crud.core$flatten_rdf_triple.invoke(core.clj:43) ~[na:na]
+	at clojure.core$map$fn__4207.invoke(core.clj:2487) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.LazySeq.sval(LazySeq.java:42) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.LazySeq.seq(LazySeq.java:60) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.Cons.next(Cons.java:39) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.PersistentVector.create(PersistentVector.java:51) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.LazilyPersistentVector.create(LazilyPersistentVector.java:31) ~[clojure-1.5.1.jar:na]
+	at clojure.core$vec.invoke(core.clj:354) ~[clojure-1.5.1.jar:na]
+	at om_crud.core$entities.invoke(core.clj:47) ~[na:na]
+	at om_crud.core$fn__3847.invoke(core.clj:100) ~[na:na]
+	at compojure.core$make_route$fn__2074.invoke(core.clj:94) ~[na:na]
+	at compojure.core$if_route$fn__2058.invoke(core.clj:40) ~[na:na]
+	at compojure.core$if_method$fn__2051.invoke(core.clj:25) ~[na:na]
+	at compojure.core$routing$fn__2080.invoke(core.clj:107) ~[na:na]
+	at clojure.core$some.invoke(core.clj:2443) ~[clojure-1.5.1.jar:na]
+	at compojure.core$routing.doInvoke(core.clj:107) ~[na:na]
+	at clojure.lang.RestFn.applyTo(RestFn.java:139) ~[clojure-1.5.1.jar:na]
+	at clojure.core$apply.invoke(core.clj:619) ~[clojure-1.5.1.jar:na]
+	at compojure.core$routes$fn__2084.invoke(core.clj:112) ~[na:na]
+	at ring.middleware.edn$wrap_edn_params$fn__1698.invoke(edn.clj:34) ~[na:na]
+	at clojure.lang.Var.invoke(Var.java:415) ~[clojure-1.5.1.jar:na]
+	at ring.adapter.jetty$proxy_handler$fn__1637.invoke(jetty.clj:18) ~[na:na]
+	at ring.adapter.jetty.proxy$org.eclipse.jetty.server.handler.AbstractHandler$0.handle(Unknown Source) ~[na:na]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) ~[jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:363) ~[jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:483) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:920) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:982) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635) [jetty-http-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235) [jetty-http-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_71]
+20034 [qtp727409827-20] ERROR om-crud.core - {:s "http://www.example.com/Markus", :p "brother", :o "http://www.example.com/Andreas"}
+3082 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3115 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3082 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3112 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+14081 [qtp2004060070-25] WARN  o.e.j.server.AbstractHttpConnection - /entities
+java.lang.ClassCastException: com.hp.hpl.jena.rdf.model.impl.LiteralImpl cannot be cast to java.lang.Class
+	at clojure.core$instance_QMARK_.invoke(core.clj:140) ~[clojure-1.5.1.jar:na]
+	at om_crud.core$flatten_rdf_triple.invoke(core.clj:44) ~[na:na]
+	at clojure.core$map$fn__4207.invoke(core.clj:2487) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.LazySeq.sval(LazySeq.java:42) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.LazySeq.seq(LazySeq.java:60) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.RT.seq(RT.java:484) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.LazilyPersistentVector.create(LazilyPersistentVector.java:31) ~[clojure-1.5.1.jar:na]
+	at clojure.core$vec.invoke(core.clj:354) ~[clojure-1.5.1.jar:na]
+	at om_crud.core$entities.invoke(core.clj:48) ~[na:na]
+	at om_crud.core$fn__3847.invoke(core.clj:101) ~[na:na]
+	at compojure.core$make_route$fn__2074.invoke(core.clj:94) ~[na:na]
+	at compojure.core$if_route$fn__2058.invoke(core.clj:40) ~[na:na]
+	at compojure.core$if_method$fn__2051.invoke(core.clj:25) ~[na:na]
+	at compojure.core$routing$fn__2080.invoke(core.clj:107) ~[na:na]
+	at clojure.core$some.invoke(core.clj:2443) ~[clojure-1.5.1.jar:na]
+	at compojure.core$routing.doInvoke(core.clj:107) ~[na:na]
+	at clojure.lang.RestFn.applyTo(RestFn.java:139) ~[clojure-1.5.1.jar:na]
+	at clojure.core$apply.invoke(core.clj:619) ~[clojure-1.5.1.jar:na]
+	at compojure.core$routes$fn__2084.invoke(core.clj:112) ~[na:na]
+	at ring.middleware.edn$wrap_edn_params$fn__1698.invoke(edn.clj:34) ~[na:na]
+	at clojure.lang.Var.invoke(Var.java:415) ~[clojure-1.5.1.jar:na]
+	at ring.adapter.jetty$proxy_handler$fn__1637.invoke(jetty.clj:18) ~[na:na]
+	at ring.adapter.jetty.proxy$org.eclipse.jetty.server.handler.AbstractHandler$0.handle(Unknown Source) ~[na:na]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) ~[jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:363) ~[jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:483) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:920) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:982) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635) [jetty-http-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235) [jetty-http-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_71]
+3205 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3240 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3223 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3255 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080

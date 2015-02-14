@@ -2,13 +2,14 @@
   (:require [ring.util.response :refer [file-response]]
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.middleware.edn :refer [wrap-edn-params]]
-            [compojure.core :refer [defroutes GET PUT DELETE]]
+            [compojure.core :refer [defroutes GET PUT DELETE POST]]
             [compojure.route :as route]
             [compojure.handler :as handler]
             [clojure.tools.logging :as log]
             [clojure.java.io :as io]
             [om-crud.rdf :as co])
   (:import (com.hp.hpl.jena.tdb TDBFactory)
+           (com.hp.hpl.jena.rdf.model Literal)
            (java.io PushbackReader)
            (com.hp.hpl.jena.query ReadWrite)))
 
@@ -40,7 +41,7 @@
 ;;{:p #<ResourceImpl http://www.example.comfullname>, :s #<ResourceImpl http://example.com/JohnSmith>, :o #<LiteralImpl John Smith>}
 (defn flatten-rdf-triple [triple]
   (let [uri (.getURI (:s triple))
-        fullname (.getValue (:o triple))]
+        fullname (if (instance? com.hp.hpl.jena.rdf.model.Literal (:o triple)) (.getValue (:o triple)) nil)]
     {:uri uri, :fullname fullname}))
 
 (defn entities []
@@ -78,12 +79,32 @@
   (delete params)
   (generate-response {:status :ok}))
 
+(defn insert [{:keys [s p o] :as params}]
+  (do
+    ;;TODO: remove
+    (log/error (str params))
+    (.begin ds (ReadWrite/WRITE))
+    (let [model (.getDefaultModel ds)
+          sub (co/create-resource model s)
+          pred (co/create-property model "http://www.example.com" p)
+          obj (co/create-resource model o)]
+        (co/add-object sub pred obj)
+    (.commit ds)
+    (.end ds))))
+
+(defn insert-entity [params]
+  (insert params)
+  (generate-response {:status :ok}))
+
 (defroutes routes
   (GET "/" [] (index))
   (GET "/entities" [] (entities))
   (PUT "/entity/update"
     {params :params edn-params :edn-params}
     (update-entity edn-params))
+  (POST "/entity/insert"
+    {params :params edn-params :edn-params}
+    (insert-entity edn-params))
   (DELETE "/entity/delete"
     {params :params edn-params :edn-params}
     (delete-entity edn-params))

@@ -8,8 +8,6 @@
            goog.net.EventType
            [goog.events EventType]))
 
-;; TODO replace :fullname with something more general perhaps
-
 (enable-console-print!)
 
 (def ^:private meths
@@ -28,7 +26,8 @@
         #js {"Content-Type" "application/edn"}))))
 
 (def app-state
-  (atom {:entities []}))
+  (atom {:entities []
+         :inserts [{:s "" :p "" :o ""}]}))
 
 (defn display [show]
   (if show
@@ -111,4 +110,56 @@
 
 (om/root entities-view app-state
   {:target (gdom/getElement "entities")})
+
+(defn on-insert [data]
+  (edn-xhr
+    {:method :post
+     :url (str "entity/insert")
+     :data data
+     :on-complete
+     (fn [res]
+       (println "server response:" res))}))
+
+
+(defn triple [data owner {:keys [] :as opts}]
+  (reify
+    om/IRenderState
+    (render-state [_ {:keys []}]
+      (let [subject (get data :s)
+            predicate (get data :p)
+            object (get data :o)]
+        (dom/li nil
+          ;; subject
+          (dom/input
+            #js {:value subject
+                 :onChange #(handle-change % data :s owner)})
+          (dom/input
+            #js {:value predicate
+                 :onChange #(handle-change % data :p owner)})
+          (dom/input
+            #js {:value object
+                 :onChange #(handle-change % data :o owner)})
+          (dom/button
+            #js {:onClick #(on-insert data)}
+            "Submit"))))))
+
+
+(defn inserts-view [app owner]
+  (reify
+    om/IRender
+    (render [_]
+      (dom/div #js {:id "inserts"}
+        (dom/h2 nil "Inserts")
+        (apply dom/ul nil
+          (map
+            (fn [insert]
+              (let [uri (:uri insert)]
+                (om/build triple insert
+                  {:opts {}})))
+            (:inserts app)))))))
+
+
+(om/root inserts-view app-state
+  {:target (gdom/getElement "inserts")})
+
 
