@@ -213,3 +213,5 @@ clojure.lang.ArityException: Wrong number of args (0) passed to: core$query-spar
 9522 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
 3639 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
 3672 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3429 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3461 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080

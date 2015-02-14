@@ -185,7 +185,7 @@
           (dom/button
             #js {:onClick #(on-query data query)}
             "Submit Query")
-          (dom/span result))))))
+          (dom/h3 nil result))))))
 
 (defn sparql-view [app owner]
   (reify
