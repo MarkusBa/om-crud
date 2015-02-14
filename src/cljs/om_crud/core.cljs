@@ -170,7 +170,7 @@
      :data {:query query}
      :on-complete (fn [res] (do
                               (println "sparql-response: " res)
-                              (om/transact! data :result (fn [_] res))))}))
+                              (om/update! data [:result] res)))}))
 
 (defn sparqlgui [data owner {:keys [] :as opts}]
   (reify
