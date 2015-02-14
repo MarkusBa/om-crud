@@ -41,8 +41,9 @@
 ;;{:p #<ResourceImpl http://www.example.comfullname>, :s #<ResourceImpl http://example.com/JohnSmith>, :o #<LiteralImpl John Smith>}
 (defn flatten-rdf-triple [triple]
   (let [uri (.getURI (:s triple))
+        pred (.getLocalName (:p triple))
         fullname (if (instance? com.hp.hpl.jena.rdf.model.Literal (:o triple)) (.getValue (:o triple)) (str (:o triple)))]
-    {:uri uri, :fullname fullname}))
+    {:uri uri, (keyword pred) fullname}))
 
 (defn entities []
   (generate-response (vec (map flatten-rdf-triple (all-rdf)))))
@@ -57,7 +58,7 @@
           rs (co/get-resource model uri)]
       (doseq [keyval params-to-iterate]
         ;;keyval might be [:fullname "Albert Einstein"]
-        (let [pro (co/get-property model "http://www.example.com" (name (first keyval)))]
+        (let [pro (co/get-property model "http://www.example.com/" (name (first keyval)))]
           (co/update-property rs pro (second keyval))))
     (.commit ds)
     (.end ds))))
@@ -84,7 +85,7 @@
     (.begin ds (ReadWrite/WRITE))
     (let [model (.getDefaultModel ds)
           sub (co/create-resource model s)
-          pred (co/create-property model "http://www.example.com" p)
+          pred (co/create-property model "http://www.example.com/" p)
           obj (co/create-resource model o)]
         (co/add-object sub pred obj)
     (.commit ds)
@@ -96,7 +97,7 @@
 
 ;; returns the data
 ;; param could be "select ?s ?p ?o where { ?s ?p ?o }"
-(defn query-sparql [{:keys [query] :as params}]
+(defn query-sparql [query]
    (let [sth (.begin ds (ReadWrite/READ))
         model (.getDefaultModel ds)
         entities (co/select-query model query)]
@@ -104,8 +105,8 @@
     (.end ds)
     entities))
 
-(defn query [params]
-  (generate-response (vec (map flatten-rdf-triple (query-sparql params)))))
+(defn query [{:keys [query] :as params}]
+  (generate-response {:query query :result (vec (map flatten-rdf-triple (query-sparql query)))}))
 
 (defroutes routes
   (GET "/" [] (index))

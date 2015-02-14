@@ -28,7 +28,7 @@
 (def app-state
   (atom {:entities []
          :inserts [{:s "" :p "" :o ""}]
-         :sparql [{:query ""}]}))
+         :sparql [{:query "" :result ""}]}))
 
 (defn display [show]
   (if show
@@ -163,27 +163,29 @@
 (om/root inserts-view app-state
   {:target (gdom/getElement "inserts")})
 
-(defn on-query [query]
+(defn on-query [data query]
   (edn-xhr
     {:method :post
      :url (str "query")
      :data {:query query}
-     :on-complete
-     (fn [res]
-       (println "server response:" res))}))
+     :on-complete (fn [res] (do
+                              (println "sparql-response: " res)
+                              (om/transact! data :result (fn [_] res))))}))
 
 (defn sparqlgui [data owner {:keys [] :as opts}]
   (reify
     om/IRenderState
     (render-state [_ {:keys []}]
-      (let [query (get data :query)]
+      (let [query (get data :query)
+            result (get data :result)]
         (dom/li nil
           (dom/input
             #js {:value query
                  :onChange #(handle-change % data :query owner)})
           (dom/button
-            #js {:onClick #(on-query query)}
-            "Submit Query"))))))
+            #js {:onClick #(on-query data query)}
+            "Submit Query")
+          (dom/span result))))))
 
 (defn sparql-view [app owner]
   (reify
@@ -191,13 +193,14 @@
     (render [_]
       (dom/div #js {:id "sparql"}
         (dom/h2 nil "Sparql")
+        (dom/h3 nil "Example: select ?s ?p ?o where { ?s ?p ?o }")
         (apply dom/ul nil
           (map
             (fn [sparql]
               (let [uri (:uri sparql)]
                 (om/build sparqlgui sparql
                   {:opts {}})))
-            (:inserts app)))))))
+            (:sparql app)))))))
 
 
 (om/root sparql-view app-state

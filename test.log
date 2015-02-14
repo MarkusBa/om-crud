@@ -193,3 +193,23 @@ clojure.lang.ArityException: Wrong number of args (0) passed to: core$query-spar
 3202 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
 3142 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
 3194 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3299 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3329 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3089 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3119 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3262 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3293 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3343 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3374 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3183 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3214 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3155 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3186 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+15298 [nREPL-worker-0] INFO  om-crud.util - importing data
+25017 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+25052 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3605 [nREPL-worker-0] INFO  om-crud.util - importing data
+9489 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+9522 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3639 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3672 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080

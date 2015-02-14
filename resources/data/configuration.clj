@@ -1,1 +1,1 @@
-{:directory "/home/markus/tdb"}
+{:directory "/home/markus/tdb2"}

@@ -1,10 +1,18 @@
 (ns om-crud.util
   (:require [om-crud.rdf :as co]
+            [clojure.java.io :as io]
             [clojure.tools.logging :as log])
   (:import (com.hp.hpl.jena.tdb TDBFactory)
+           (java.io PushbackReader)
            (com.hp.hpl.jena.query ReadWrite)))
 
-(def directory "/home/markus/tdb")
+(defn load-config [filename]
+  (with-open [r (io/reader filename)]
+    (read (java.io.PushbackReader. r))))
+
+(def configuration (load-config "resources/data/configuration.clj"))
+(def directory (configuration :directory ))
+
 ;; uri for some random resources
 (def uri "http://example.com/JohnSmith")
 (def uri2 "http://example.com/MarkusBa")
@@ -23,7 +31,7 @@
           rs (co/create-resource model uri)
           rs2 (co/create-resource model uri2)
           rs3 (co/create-resource model uri3)
-          pro (co/create-property model "http://www.example.com" "fullname")]
+          pro (co/create-property model "http://www.example.com/" "fullname")]
         ;; add the property to the resorce with some object
         (co/add-object rs pro "John Smith")
         (co/add-object rs2 pro "Markus Ba")
