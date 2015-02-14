@@ -6,11 +6,18 @@
             [compojure.route :as route]
             [compojure.handler :as handler]
             [clojure.tools.logging :as log]
+            [clojure.java.io :as io]
             [om-crud.rdf :as co])
   (:import (com.hp.hpl.jena.tdb TDBFactory)
+           (java.io PushbackReader)
            (com.hp.hpl.jena.query ReadWrite)))
 
-(def directory "/home/markus/tdb")
+(defn load-config [filename]
+  (with-open [r (io/reader filename)]
+    (read (java.io.PushbackReader. r))))
+
+(def configuration (load-config "resources/data/configuration.clj"))
+(def directory (configuration :directory ))
 (def ds (TDBFactory/createDataset directory))
 
 (defn index []

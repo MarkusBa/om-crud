@@ -1,6 +1,7 @@
 * DONE gitignore subfolders of out
 * DONE make logging work
-* research how general clojure keywords can be
-* make more general
-* add deletions
-* make configurable
+* DONE research how general clojure keywords can be
+* DONE make more general
+* DONE add deletions
+* DONE make configurable
+* frontend for any entity
