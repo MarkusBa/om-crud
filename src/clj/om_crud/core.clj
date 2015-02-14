@@ -47,12 +47,9 @@
     (let [model (.getDefaultModel ds)
           params-to-iterate (dissoc params :uri)
           rs (co/get-resource model uri)]
-      (log/error (str params))
       (doseq [keyval params-to-iterate]
         ;;keyval might be [:fullname "Albert Einstein"]
         (let [pro (co/get-property model "http://www.example.com" (name (first keyval)))]
-          ;;TODO: remove
-          (log/error (str "key-value-pair: " keyval))
           (co/update-property rs pro (second keyval))))
     (.commit ds)
     (.end ds))))
