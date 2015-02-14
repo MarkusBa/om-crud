@@ -27,7 +27,8 @@
 
 (def app-state
   (atom {:entities []
-         :inserts [{:s "" :p "" :o ""}]}))
+         :inserts [{:s "" :p "" :o ""}]
+         :sparql [{:query ""}]}))
 
 (defn display [show]
   (if show
@@ -122,7 +123,6 @@
      (fn [res]
        (println "server response:" res))}))
 
-
 (defn triple [data owner {:keys [] :as opts}]
   (reify
     om/IRenderState
@@ -163,4 +163,42 @@
 (om/root inserts-view app-state
   {:target (gdom/getElement "inserts")})
 
+(defn on-query [query]
+  (edn-xhr
+    {:method :post
+     :url (str "query")
+     :data {:query query}
+     :on-complete
+     (fn [res]
+       (println "server response:" res))}))
 
+(defn sparqlgui [data owner {:keys [] :as opts}]
+  (reify
+    om/IRenderState
+    (render-state [_ {:keys []}]
+      (let [query (get data :query)]
+        (dom/li nil
+          (dom/input
+            #js {:value query
+                 :onChange #(handle-change % data :query owner)})
+          (dom/button
+            #js {:onClick #(on-query query)}
+            "Submit Query"))))))
+
+(defn sparql-view [app owner]
+  (reify
+    om/IRender
+    (render [_]
+      (dom/div #js {:id "sparql"}
+        (dom/h2 nil "Sparql")
+        (apply dom/ul nil
+          (map
+            (fn [sparql]
+              (let [uri (:uri sparql)]
+                (om/build sparqlgui sparql
+                  {:opts {}})))
+            (:inserts app)))))))
+
+
+(om/root sparql-view app-state
+  {:target (gdom/getElement "sparql")})

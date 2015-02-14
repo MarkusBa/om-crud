@@ -41,7 +41,7 @@
 ;;{:p #<ResourceImpl http://www.example.comfullname>, :s #<ResourceImpl http://example.com/JohnSmith>, :o #<LiteralImpl John Smith>}
 (defn flatten-rdf-triple [triple]
   (let [uri (.getURI (:s triple))
-        fullname (if (instance? com.hp.hpl.jena.rdf.model.Literal (:o triple)) (.getValue (:o triple)) nil)]
+        fullname (if (instance? com.hp.hpl.jena.rdf.model.Literal (:o triple)) (.getValue (:o triple)) (str (:o triple)))]
     {:uri uri, :fullname fullname}))
 
 (defn entities []
@@ -81,8 +81,6 @@
 
 (defn insert [{:keys [s p o] :as params}]
   (do
-    ;;TODO: remove
-    (log/error (str params))
     (.begin ds (ReadWrite/WRITE))
     (let [model (.getDefaultModel ds)
           sub (co/create-resource model s)
@@ -96,9 +94,25 @@
   (insert params)
   (generate-response {:status :ok}))
 
+;; returns the data
+;; param could be "select ?s ?p ?o where { ?s ?p ?o }"
+(defn query-sparql [{:keys [query] :as params}]
+   (let [sth (.begin ds (ReadWrite/READ))
+        model (.getDefaultModel ds)
+        entities (co/select-query model query)]
+    (.commit ds)
+    (.end ds)
+    entities))
+
+(defn query [params]
+  (generate-response (vec (map flatten-rdf-triple (query-sparql params)))))
+
 (defroutes routes
   (GET "/" [] (index))
   (GET "/entities" [] (entities))
+  (POST "/query"
+    {params :params edn-params :edn-params}
+    (query edn-params))
   (PUT "/entity/update"
     {params :params edn-params :edn-params}
     (update-entity edn-params))

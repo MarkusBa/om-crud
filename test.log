@@ -147,3 +147,49 @@ java.lang.ClassCastException: com.hp.hpl.jena.rdf.model.impl.LiteralImpl cannot 
 3074 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
 3104 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
 29788 [qtp881876057-23] ERROR om-crud.core - {:s "http://www.example.com/Neu", :p "withProperties", :o "http://www.example.com/Passed"}
+3357 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3388 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3243 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3274 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+27308 [qtp317541189-24] WARN  o.e.j.server.AbstractHttpConnection - /query
+clojure.lang.ArityException: Wrong number of args (0) passed to: core$query-sparql
+	at clojure.lang.AFn.throwArity(AFn.java:437) ~[clojure-1.5.1.jar:na]
+	at clojure.lang.AFn.invoke(AFn.java:35) ~[clojure-1.5.1.jar:na]
+	at om_crud.core$query.invoke(core.clj:109) ~[na:na]
+	at om_crud.core$fn__3850.invoke(core.clj:116) ~[na:na]
+	at compojure.core$make_route$fn__2074.invoke(core.clj:94) ~[na:na]
+	at compojure.core$if_route$fn__2058.invoke(core.clj:40) ~[na:na]
+	at compojure.core$if_method$fn__2051.invoke(core.clj:25) ~[na:na]
+	at compojure.core$routing$fn__2080.invoke(core.clj:107) ~[na:na]
+	at clojure.core$some.invoke(core.clj:2443) ~[clojure-1.5.1.jar:na]
+	at compojure.core$routing.doInvoke(core.clj:107) ~[na:na]
+	at clojure.lang.RestFn.applyTo(RestFn.java:139) ~[clojure-1.5.1.jar:na]
+	at clojure.core$apply.invoke(core.clj:619) ~[clojure-1.5.1.jar:na]
+	at compojure.core$routes$fn__2084.invoke(core.clj:112) ~[na:na]
+	at ring.middleware.edn$wrap_edn_params$fn__1698.invoke(edn.clj:34) ~[na:na]
+	at clojure.lang.Var.invoke(Var.java:415) ~[clojure-1.5.1.jar:na]
+	at ring.adapter.jetty$proxy_handler$fn__1637.invoke(jetty.clj:18) ~[na:na]
+	at ring.adapter.jetty.proxy$org.eclipse.jetty.server.handler.AbstractHandler$0.handle(Unknown Source) ~[na:na]
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116) ~[jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.Server.handle(Server.java:363) ~[jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:483) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection.content(AbstractHttpConnection.java:931) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.content(AbstractHttpConnection.java:992) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:856) [jetty-http-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:240) [jetty-http-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82) [jetty-server-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628) [jetty-io-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52) [jetty-io-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608) [jetty-util-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543) [jetty-util-7.6.8.v20121106.jar:7.6.8.v20121106]
+	at java.lang.Thread.run(Thread.java:745) [na:1.7.0_71]
+3260 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3299 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3168 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3198 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3545 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3575 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3158 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3202 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3142 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3194 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
