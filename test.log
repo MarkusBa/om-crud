@@ -136,3 +136,14 @@ java.lang.ClassCastException: com.hp.hpl.jena.rdf.model.impl.LiteralImpl cannot 
 3240 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
 3223 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
 3255 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3356 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3387 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3402 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3434 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3228 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3265 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3437 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3468 [nREPL-worker-0] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+3074 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3104 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+29788 [qtp881876057-23] ERROR om-crud.core - {:s "http://www.example.com/Neu", :p "withProperties", :o "http://www.example.com/Passed"}

@@ -77,6 +77,8 @@
             #js {:onClick #(on-delete uri)}
             "X"))))))
 
+;;; is actually only referenced below even if it appears otherwise
+;;; entities-view closes over on-edit to get a function of one arg
 (defn on-edit [uri fullname]
   (edn-xhr
     {:method :put
@@ -111,11 +113,11 @@
 (om/root entities-view app-state
   {:target (gdom/getElement "entities")})
 
-(defn on-insert [data]
+(defn on-insert [subject predicate object]
   (edn-xhr
     {:method :post
      :url (str "entity/insert")
-     :data data
+     :data {:s subject :p predicate :o object}
      :on-complete
      (fn [res]
        (println "server response:" res))}))
@@ -129,7 +131,6 @@
             predicate (get data :p)
             object (get data :o)]
         (dom/li nil
-          ;; subject
           (dom/input
             #js {:value subject
                  :onChange #(handle-change % data :s owner)})
@@ -140,7 +141,7 @@
             #js {:value object
                  :onChange #(handle-change % data :o owner)})
           (dom/button
-            #js {:onClick #(on-insert data)}
+            #js {:onClick #(on-insert subject predicate object)}
             "Submit"))))))
 
 
