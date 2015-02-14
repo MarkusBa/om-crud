@@ -1,1 +1,5 @@
 4626 [nREPL-worker-0] ERROR om-crud.util - test
+3258 [nREPL-worker-1] INFO  org.eclipse.jetty.server.Server - jetty-7.6.8.v20121106
+3292 [nREPL-worker-1] INFO  o.e.jetty.server.AbstractConnector - Started SelectChannelConnector@0.0.0.0:8080
+15547 [qtp2078307907-25] ERROR om-crud.core - {:uri "http://example.com/JohnSmith", :fullname "John Smithson"}
+15569 [qtp2078307907-25] ERROR om-crud.core - key-value-pair: [:fullname "John Smithson"]

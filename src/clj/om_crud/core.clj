@@ -21,14 +21,14 @@
    :headers {"Content-Type" "application/edn"}
    :body (pr-str data)})
 
-(defn persons-rdf []
+(defn all-rdf []
   (let [sth (.begin ds (ReadWrite/READ))
         model (.getDefaultModel ds)
         qs "select ?s ?p ?o where { ?s ?p ?o }"
-        persons (co/select-query model qs)]
+        entities (co/select-query model qs)]
     (.commit ds)
     (.end ds)
-    persons))
+    entities))
 
 ;;{:p #<ResourceImpl http://www.example.comfullname>, :s #<ResourceImpl http://example.com/JohnSmith>, :o #<LiteralImpl John Smith>}
 (defn flatten-rdf-triple [triple]
@@ -36,25 +36,31 @@
         fullname (.getValue (:o triple))]
     {:uri uri, :fullname fullname}))
 
-(defn persons []
-  (generate-response (vec (map flatten-rdf-triple (persons-rdf)))))
+(defn entities []
+  (generate-response (vec (map flatten-rdf-triple (all-rdf)))))
 
-;; TODO: make general
-(defn update [{:keys [uri fullname] :as params}]
+(defn update
+  "Receives {:uri 'http://www.example.com/something' :key 'Value'}"
+  [{:keys [uri] :as params}]
   (do
     (.begin ds (ReadWrite/WRITE))
     (let [model (.getDefaultModel ds)
-          rs (co/get-resource model uri)
-          pro (co/get-property model "http://www.example.com" "fullname")]
-        (co/update-property rs pro fullname)
+          params-to-iterate (dissoc params :uri)
+          rs (co/get-resource model uri)]
+      (log/error (str params))
+      (doseq [keyval params-to-iterate]
+        ;;keyval might be [:fullname "Albert Einstein"]
+        (let [pro (co/get-property model "http://www.example.com" (name (first keyval)))]
+          ;;TODO: remove
+          (log/error (str "key-value-pair: " keyval))
+          (co/update-property rs pro (second keyval))))
     (.commit ds)
     (.end ds))))
 
-(defn update-person [params]
+(defn update-entity [params]
   (update params)
   (generate-response {:status :ok}))
 
-;; TODO: make general
 (defn delete [{:keys [uri] :as params}]
   (do
     (.begin ds (ReadWrite/WRITE))
@@ -64,19 +70,19 @@
     (.commit ds)
     (.end ds))))
 
-(defn delete-person [params]
+(defn delete-entity [params]
   (delete params)
   (generate-response {:status :ok}))
 
 (defroutes routes
   (GET "/" [] (index))
-  (GET "/persons" [] (persons))
-  (PUT "/person/update"
+  (GET "/entities" [] (entities))
+  (PUT "/entity/update"
     {params :params edn-params :edn-params}
-    (update-person edn-params))
-  (DELETE "/person/delete"
+    (update-entity edn-params))
+  (DELETE "/entity/delete"
     {params :params edn-params :edn-params}
-    (delete-person edn-params))
+    (delete-entity edn-params))
   (route/files "/" {:root "resources/public"}))
 
 (def app

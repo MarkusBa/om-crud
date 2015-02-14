@@ -8,6 +8,8 @@
            goog.net.EventType
            [goog.events EventType]))
 
+;; TODO replace :fullname with something more general perhaps
+
 (enable-console-print!)
 
 (def ^:private meths
@@ -26,7 +28,7 @@
         #js {"Content-Type" "application/edn"}))))
 
 (def app-state
-  (atom {:persons []}))
+  (atom {:entities []}))
 
 (defn display [show]
   (if show
@@ -43,7 +45,7 @@
 (defn on-delete [uri]
   (edn-xhr
     {:method :delete
-     :url (str "person/delete")
+     :url (str "entity/delete")
      :data {:uri uri}
      :on-complete
      (fn [res]
@@ -79,34 +81,34 @@
 (defn on-edit [uri fullname]
   (edn-xhr
     {:method :put
-     :url (str "person/update")
+     :url (str "entity/update")
      :data {:uri uri :fullname fullname}
      :on-complete
      (fn [res]
        (println "server response:" res))}))
 
-(defn persons-view [app owner]
+(defn entities-view [app owner]
   (reify
     om/IWillMount
     (will-mount [_]
       (edn-xhr
         {:method :get
-         :url "persons"
-         :on-complete #(om/transact! app :persons (fn [_] %))}))
+         :url "entities"
+         :on-complete #(om/transact! app :entities (fn [_] %))}))
     om/IRender
     (render [_]
-      (dom/div #js {:id "persons"}
-        (dom/h2 nil "Persons")
+      (dom/div #js {:id "entities"}
+        (dom/h2 nil "Entities")
         (apply dom/ul nil
           (map
-            (fn [person]
-              (let [uri (:uri person)]
-                (om/build editable person
+            (fn [entity]
+              (let [uri (:uri entity)]
+                (om/build editable entity
                   {:opts {:edit-key :fullname
                           :uri uri
                           :on-edit #(on-edit uri %)}})))
-            (:persons app)))))))
+            (:entities app)))))))
 
-(om/root persons-view app-state
-  {:target (gdom/getElement "persons")})
+(om/root entities-view app-state
+  {:target (gdom/getElement "entities")})
 
